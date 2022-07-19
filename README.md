@@ -38,7 +38,7 @@ const mongoose = require('mongoose')
 let MONGODB_URI = 'mongodb://127.0.0.1:27017/plantsDatabase'
 
 mongoose
-    .connect(MONGODB_URI, { useUnifiedTopology: true, useNewUrlParser: true })
+    .connect(MONGODB_URI)
     .then(() => {
         console.log('Successfully connected to MongoDB.')
     })
@@ -491,16 +491,12 @@ u2_hw_mongoose_plants/controllers/index.js
 ```js
 const updatePlant = async (req, res) => {
     try {
-        const { id } = req.params;
-        await Plant.findByIdAndUpdate(id, req.body, { new: true }, (err, plant) => {
-            if (err) {
-                res.status(500).send(err);
-            }
-            if (!plant) {
-                res.status(500).send('Plant not found!');
-            }
-            return res.status(200).json(plant);
-        })
+        let { id } = req.params;
+        let plant = await Plant.findByIdAndUpdate(id, req.body, { new: true })
+        if (plant) {
+            return res.status(200).json(plant)
+        }
+        throw new Error("Plant not found")
     } catch (error) {
         return res.status(500).send(error.message);
     }
