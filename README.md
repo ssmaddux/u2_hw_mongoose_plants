@@ -220,7 +220,7 @@ Good, now let's work on the controllers. Controllers are where we will set up al
 
 #### createPlant
 
-u2_hw_mongoose_plants/controllers/index.js
+/controllers/index.js
 ```js
 const Plant = require('../models/plant');
 
