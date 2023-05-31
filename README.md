@@ -57,7 +57,7 @@ module.exports = db
 ### Mongoose Schemas and Models
 Although, MongoDB is schema-less, Mongoose allows us to write a schema for our plant model which makes it nice to know what is a plant in our database and what a plant "looks" like in our database:
 
-mongodb-mongoose-express-using-router/models/plant.js
+models/plant.js
 ```js
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
