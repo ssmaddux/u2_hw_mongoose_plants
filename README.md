@@ -62,9 +62,6 @@ models/plant.js
 const mongoose = require('mongoose')
 const  { Schema } = mongoose.Schema
 
-
-db.on('error', console.error.bind(console, 'MongoDB connection error:'))
-
 const Plant = new Schema(
     {
         name: { type: String, required: true },
@@ -162,7 +159,7 @@ Add the scripts to your `package.json`:
 And now let's setup our express folders:
 
 ```sh
-mkdir routes controllers
+mkdir  controllers
 touch server.js  controllers/plantController.js
 ```
 
@@ -221,18 +218,6 @@ Awesome! Now I want to create a controller method to grab all the plants from th
 u2_hw_mongoose_plants/controllers/index.js
 ```js
 const Plant = require('../models/plant');
-
-const createPlant = async (req, res) => {
-    try {
-        const plant = await new Plant(req.body)
-        await plant.save()
-        return res.status(201).json({
-            plant,
-        });
-    } catch (error) {
-        return res.status(500).json({ error: error.message })
-    }
-}
 
 const getAllPlants = async (req, res) => {
     try {
