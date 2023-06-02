@@ -21,7 +21,7 @@ Let's start!
 npm init -y
 npm install mongoose
 mkdir db models seed
-touch db/index.js models/plant.js seed/plants.js
+touch db/.js models/plant.js seed/plants.js
 ```
 
 Now let's open up Visual Studio Code and write some code:
@@ -215,7 +215,7 @@ Good, now let's work on the controllers. Controllers are where we will set up al
 
 Awesome! Now I want to create a controller method to grab all the plants from the database:
 
-u2_hw_mongoose_plants/controllers/index.js
+u2_hw_mongoose_plants/controllers/plantController.js
 ```js
 const Plant = require('../models/plant');
 
@@ -238,7 +238,7 @@ Add the following route to your server.js file:
 app.get('/plants', controllers.getAllPlants)
 ```
 
-Open http://localhost:3001/api/plants in your browser or do a GET request in Insomnia.
+Open http://localhost:3001/api/plants in your browser or do a GET request in ThunderClient.
 
 - You should see an JSON object with an array of all `"plants":` in the database
 - Make sure to grab the `_id` of the `"Test Plant"` we just added in the previous step, it will be useful for the next few routes.
@@ -253,7 +253,7 @@ ___
 
 Nice, now let's add the ability to find a specific plant:
 
-u2_hw_mongoose_plants/controllers/index.js
+u2_hw_mongoose_plants/controllers/plantController.js
 ```js
 const getPlantById = async (req, res) => {
     try {
@@ -271,7 +271,7 @@ const getPlantById = async (req, res) => {
 
 Add it to the export:
 
-u2_hw_mongoose_plants/controllers/index.js
+u2_hw_mongoose_plants/controllers/plantController.js
 ```js
 module.exports = {
     getAllPlants,
@@ -281,7 +281,7 @@ module.exports = {
 
 Add the route:
 
-u2_hw_mongoose_plants/routes/index.js
+u2_hw_mongoose_plants/server.js
 ```js
 app.get('/plants/:id', controllers.getPlantById)
 ```
@@ -339,7 +339,7 @@ open http://localhost:3001/api/plants/5e38921e9c3bd077f50dc9a2
 
 You should now see in your server's terminal something like this:
 ```sh
-GET /api/plants/5e38921e9c3bd077f50dc9a2 200 14.273 ms
+GET /plants/5e38921e9c3bd077f50dc9a2 200 14.273 ms
 ```
 
 That's `morgan`! That's some good logging!
@@ -352,7 +352,7 @@ That's `morgan`! That's some good logging!
 
 #### createPlant
 
-/controllers/index.js
+/controllers/plantController.js
 ```js
 const Plant = require('../models/plant');
 
@@ -404,7 +404,6 @@ app.use(bodyParser.json())
   app.use(bodyParser.json());
   // app.use() middleware here ^ ///////////////////
 
-  app.use('/api', routes);
 
   db.on('error', console.error.bind(console, 'MongoDB connection error:'))
 
@@ -426,7 +425,7 @@ const controllers = require('../controllers')
 
 app.get('/', (req, res) => res.send('This is root!'))
 
-app.post('/plants', controllers.createPlant)
+app.post('/plants', plantController.createPlant)
 
 ```
 
@@ -463,7 +462,7 @@ ___
 
 So we can now create plants, show all plants, and show a specific plant. How about updating a plant and deleting a plant?
 
-u2_hw_mongoose_plants/controllers/index.js
+u2_hw_mongoose_plants/controllers/plantController.js
 ```js
 const updatePlant = async (req, res) => {
     try {
@@ -506,15 +505,15 @@ module.exports = {
 
 Let's add our routes:
 
-u2_hw_mongoose_plants/routes/index.js
+u2_hw_mongoose_plants/server.js
 ```js
 app.put('/plants/:id', controllers.updatePlant)
 app.delete('/plants/:id', controllers.deletePlant)
 ```
 
-Test update (PUT) in Insomnia. Remember that you'll have to use the `_id` of _your_ Test Plant. Your request body in Insomnia will have to look something like this:
+Test update (PUT) in ThunderClient. Remember that you'll have to use the `_id` of _your_ Test Plant. Your request body in Insomnia will have to look something like this:
 
-http://localhost:3001/api/plants/5e38921e9c3bd077f50dc9a2
+http://localhost:3001/plants/5e38921e9c3bd077f50dc9a2
 
 ```js
 {
@@ -524,7 +523,7 @@ http://localhost:3001/api/plants/5e38921e9c3bd077f50dc9a2
 }
 ```
 
-Test delete (DEL) in Insomnia using a URL like this http://localhost:3001/api/plants/5e38921e9c3bd077f50dc9a2
+Test delete (DEL) in ThunderClient using a URL like this http://localhost:3001/api/plants/5e38921e9c3bd077f50dc9a2
 
 Success! We built a full CRUD JSON API in MongoDB, Mongoose, and Express using Express Router! 
 
