@@ -233,7 +233,7 @@ module.exports = {
 }
 ```
 
-Add the following route to your ./routes/index.js file:
+Add the following route to your server.js file:
 ```js
 app.get('/plants', controllers.getAllPlants)
 ```
