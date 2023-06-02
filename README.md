@@ -60,7 +60,7 @@ Although, MongoDB is schema-less, Mongoose allows us to write a schema for our p
 models/plant.js
 ```js
 const mongoose = require('mongoose')
-const Schema = mongoose.Schema
+const  { Schema } = mongoose.Schema
 
 
 db.on('error', console.error.bind(console, 'MongoDB connection error:'))
