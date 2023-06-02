@@ -38,7 +38,7 @@ mongodb-mongoose-express-using-router/db/index.js
 const mongoose = require('mongoose')
 
 mongoose
-    .connect(mongodb://127.0.0.1:27017/plantsDatabase)
+    .connect('mongodb://127.0.0.1:27017/plantsDatabase')
     .then(() => {
         console.log('Successfully connected to MongoDB.')
     })
