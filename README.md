@@ -46,6 +46,8 @@ mongoose
         console.error('Connection error', e.message)
     })
 
+
+
 const db = mongoose.connection
 
 module.exports = db
@@ -59,6 +61,9 @@ models/plant.js
 ```js
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
+
+
+db.on('error', console.error.bind(console, 'MongoDB connection error:'))
 
 const Plant = new Schema(
     {
@@ -163,14 +168,10 @@ touch server.js  controllers/plantController.js
 
 Let's setup the root route:
 
-mongodb-mongoose-express-using-router/routes/index.js
 ```js
-const { Router } = require('express');
-const router = Router();
 
-router.get('/', (req, res) => res.send('This is root!'))
+app.get('/', (req, res) => res.send('This is root!'))
 
-module.exports = router;
 ```
 
 ![root](https://mrtreeservices.com/wp-content/uploads/2017/04/How-to-Prevent-Roots-from-Damaging-Your-Pipes.jpg)
@@ -187,8 +188,6 @@ const PORT = process.env.PORT || 3001;
 const app = express();
 
 // app.use() middleware here ^ ///////////////////
-
-db.on('error', console.error.bind(console, 'MongoDB connection error:'))
 
 app.listen(PORT, () => console.log(`Listening on port: ${PORT}`))
 ```
