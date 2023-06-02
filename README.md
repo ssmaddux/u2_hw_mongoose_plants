@@ -60,7 +60,7 @@ Although, MongoDB is schema-less, Mongoose allows us to write a schema for our p
 models/plant.js
 ```js
 const mongoose = require('mongoose')
-const  { Schema } = mongoose.Schema
+const  { Schema } = require('mongoose')
 
 const Plant = new Schema(
     {
@@ -123,7 +123,7 @@ node seed/plants.js
 So how do we know if it worked? We could drop into the `mongo` interactive shell and check:
 
 ```mongo
-mongo
+mongosh
 > use plantsDatabase
 > db.plants.find()
 > exit
