@@ -289,6 +289,8 @@ app.get('/plants/:id', controllers.getPlantById)
 Test it! Your URL shold look like this, but with the `_id` of _your Test Plant_ in your URL `:params` :
 http://localhost:3001/api/plants/5e38921e9c3bd077f50dc9a2
 
+
+## Bonus 1
 This is a good point to integrate better logging. Right now, if we check our terminal when we hit the http://localhost:3001/api/plants/5e38921e9c3bd077f50dc9a2 endpoint we see the raw SQL that was executed. For debugging purposes and overall better logging we're going to use an express middleware called `morgan`:
 
 ```sh
@@ -337,6 +339,8 @@ In another terminal, run:
 open http://localhost:3001/api/plants/5e38921e9c3bd077f50dc9a2
 ```
 
+Note! Your endpoints may be a bit different, if the above ID (5e38921e9c....) comes back with a 404 error, replace that with one of the ID's in your plants db
+
 You should now see in your server's terminal something like this:
 ```sh
 GET /plants/5e38921e9c3bd077f50dc9a2 200 14.273 ms
@@ -348,7 +352,7 @@ That's `morgan`! That's some good logging!
 
 
 
-## Bonus! Create, Update, and Delete!
+## Bonus 2! Create, Update, and Delete!
 
 #### createPlant
 
